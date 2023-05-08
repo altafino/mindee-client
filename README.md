@@ -1,6 +1,6 @@
 # Mindee Client
 
-A simple Golang client for the Mindee API, allowing you to extract invoice data from PDF and TIFF files.
+A simple Golang client for the Mindee API, allowing you to extract invoice data from JPEG, PNG, WEBP, HEIC, TIFF image or PDF files.
 
 ## Installation
 
@@ -29,23 +29,22 @@ This library provides two methods for getting invoice data from files:
 package main
 
 import (
-"fmt"
-
-	"github.com/altafino/mindee-client"
+    "fmt"
+    "github.com/altafino/mindee-client"
 )
 
 func main() {
-apiKey := "<your_api_key>"
-filePath := "path/to/invoice.pdf"
+    apiKey := "<your_api_key>"
+    filePath := "path/to/invoice.pdf"
 
-// Get invoice data from a file path
-invoiceData, err := mindee_client.GetInvoiceDataForFilePath(filePath, apiKey)
-if err != nil {
-	fmt.Printf("Error getting invoice data: %v\n", err)
-	return
-}
+    // Get invoice data from a file path
+    invoiceData, err := mindee_client.GetInvoiceDataForFilePath(filePath, apiKey)
+    if err != nil {
+	    fmt.Printf("Error getting invoice data: %v\n", err)
+	    return
+    }
 
-fmt.Printf("Invoice data: %+v\n", invoiceData)
+    fmt.Printf("Invoice data: %+v\n", invoiceData)
 }
 ```
 
