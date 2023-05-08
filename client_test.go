@@ -14,8 +14,8 @@ import (
 // 2. Run `go test ./...` from the root of the project
 
 const (
-	apiKey       = "7eed5d3f8e8254eef68fe31a8da7d2ac"
-	testFilePath = "HORISENAG_Inv_GMS-2200232_31.01.2022_000005668.pdf"
+	apiKey       = "YOUR_API_KEY"
+	testFilePath = "YOUR_TEST_FILE_PATH"
 )
 
 func TestGetInvoiceDataForFilePath(t *testing.T) {
