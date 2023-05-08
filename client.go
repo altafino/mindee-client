@@ -10,6 +10,8 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/TylerBrock/colorjson"
+
 	"github.com/altafino/mindee-client/models"
 )
 
@@ -67,7 +69,7 @@ func getInvoiceData(fileContents []byte, apiKey string) (*models.InvoiceData, er
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
+	if resp.StatusCode != http.StatusOK && resp.StatusCode != http.StatusCreated {
 		return nil, fmt.Errorf("unexpected response status: %d", resp.StatusCode)
 	}
 
@@ -75,6 +77,9 @@ func getInvoiceData(fileContents []byte, apiKey string) (*models.InvoiceData, er
 	if err := json.NewDecoder(resp.Body).Decode(data); err != nil {
 		return nil, fmt.Errorf("failed to decode response: %v", err)
 	}
+
+	s, _ := colorjson.Marshal(data)
+	fmt.Println(string(s))
 
 	return data, nil
 }

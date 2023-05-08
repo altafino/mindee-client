@@ -1,6 +1,9 @@
 package models
 
-import "time"
+import (
+	"encoding/json"
+	"time"
+)
 
 type InvoiceData struct {
 	APIRequest struct {
@@ -19,7 +22,7 @@ type InvoiceData struct {
 		Inference struct {
 			Extras struct {
 			} `json:"extras"`
-			FinishedAt time.Time `json:"finished_at"`
+			FinishedAt CustomTime `json:"finished_at"`
 			Pages      []struct {
 				Extras struct {
 				} `json:"extras"`
@@ -64,11 +67,11 @@ type InvoiceData struct {
 						Description string      `json:"description"`
 						Polygon     [][]float64 `json:"polygon"`
 						ProductCode string      `json:"product_code"`
-						Quantity    int         `json:"quantity"`
-						TaxAmount   int         `json:"tax_amount"`
-						TaxRate     int         `json:"tax_rate"`
-						TotalAmount int         `json:"total_amount"`
-						UnitPrice   int         `json:"unit_price"`
+						Quantity    float64     `json:"quantity"`
+						TaxAmount   float64     `json:"tax_amount"`
+						TaxRate     float64     `json:"tax_rate"`
+						TotalAmount float64     `json:"total_amount"`
+						UnitPrice   float64     `json:"unit_price"`
 					} `json:"line_items"`
 					Locale struct {
 						Confidence float64 `json:"confidence"`
@@ -117,7 +120,7 @@ type InvoiceData struct {
 					TotalAmount struct {
 						Confidence float64     `json:"confidence"`
 						Polygon    [][]float64 `json:"polygon"`
-						Value      int         `json:"value"`
+						Value      float64     `json:"value"`
 					} `json:"total_amount"`
 					TotalNet struct {
 						Confidence float64     `json:"confidence"`
@@ -173,11 +176,11 @@ type InvoiceData struct {
 					PageID      int         `json:"page_id"`
 					Polygon     [][]float64 `json:"polygon"`
 					ProductCode string      `json:"product_code"`
-					Quantity    int         `json:"quantity"`
-					TaxAmount   int         `json:"tax_amount"`
-					TaxRate     int         `json:"tax_rate"`
-					TotalAmount int         `json:"total_amount"`
-					UnitPrice   int         `json:"unit_price"`
+					Quantity    float64     `json:"quantity"`
+					TaxAmount   float64     `json:"tax_amount"`
+					TaxRate     float64     `json:"tax_rate"`
+					TotalAmount float64     `json:"total_amount"`
+					UnitPrice   float64     `json:"unit_price"`
 				} `json:"line_items"`
 				Locale struct {
 					Confidence float64 `json:"confidence"`
@@ -244,11 +247,32 @@ type InvoiceData struct {
 				Name     string   `json:"name"`
 				Version  string   `json:"version"`
 			} `json:"product"`
-			StartedAt time.Time `json:"started_at"`
+			StartedAt CustomTime `json:"started_at"`
 		} `json:"inference"`
 		NPages int    `json:"n_pages"`
 		Name   string `json:"name"`
 		Ocr    struct {
 		} `json:"ocr"`
 	} `json:"document"`
+}
+
+type CustomTime struct {
+	Time time.Time
+}
+
+const customTimeFormat = "2006-01-02T15:04:05.999999"
+
+func (ct *CustomTime) UnmarshalJSON(b []byte) error {
+	var timeString string
+	if err := json.Unmarshal(b, &timeString); err != nil {
+		return err
+	}
+
+	t, err := time.Parse(customTimeFormat, timeString)
+	if err != nil {
+		return err
+	}
+
+	ct.Time = t
+	return nil
 }

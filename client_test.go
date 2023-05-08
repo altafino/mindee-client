@@ -6,7 +6,7 @@ import (
 	"os"
 	"testing"
 
-	mindeeClient "github.com/altafino/mindee-client"
+	mindee_client "github.com/altafino/mindee-client"
 )
 
 // How to run the tests:
@@ -14,18 +14,20 @@ import (
 // 2. Run `go test ./...` from the root of the project
 
 const (
-	apiKey       = "<your-api-key>"
-	testFilePath = "<test-file-name>"
+	apiKey       = "7eed5d3f8e8254eef68fe31a8da7d2ac"
+	testFilePath = "HORISENAG_Inv_GMS-2200232_31.01.2022_000005668.pdf"
 )
 
 func TestGetInvoiceDataForFilePath(t *testing.T) {
-	data, err := mindeeClient.GetInvoiceDataForFilePath(testFilePath, apiKey)
+	data, err := mindee_client.GetInvoiceDataForFilePath(testFilePath, apiKey)
 	if err != nil {
 		t.Fatalf("GetInvoiceDataForFilePath failed: %v", err)
 	}
 
 	if data == nil {
 		t.Fatal("GetInvoiceDataForFilePath returned nil data")
+	} else {
+		t.Logf("GetInvoiceDataForFilePath returned data: %+v", data)
 	}
 
 	// Add more checks to validate the structure of the returned data, e.g.:
@@ -48,13 +50,15 @@ func TestGetInvoiceDataForBase64(t *testing.T) {
 
 	base64Content := base64.StdEncoding.EncodeToString(fileContents)
 
-	data, err := mindeeClient.GetInvoiceDataForBase64(base64Content, apiKey)
+	data, err := mindee_client.GetInvoiceDataForBase64(base64Content, apiKey)
 	if err != nil {
 		t.Fatalf("GetInvoiceDataForBase64 failed: %v", err)
 	}
 
 	if data == nil {
 		t.Fatal("GetInvoiceDataForBase64 returned nil data")
+	} else {
+		t.Logf("GetInvoiceDataForBase64 returned data: %+v", data)
 	}
 
 	// Add more checks to validate the structure of the returned data, e.g.:

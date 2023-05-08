@@ -101,3 +101,11 @@ fabric.properties
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
 
+HORISENAG_Inv_GMS-2200232_31.01.2022_000005668.pdf
+
+.idea/mindee-client.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+
+test/main.go
