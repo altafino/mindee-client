@@ -38,14 +38,14 @@ func main() {
 apiKey := "<your_api_key>"
 filePath := "path/to/invoice.pdf"
 
-	// Get invoice data from a file path
-	invoiceData, err := mindee_client.GetInvoiceDataForFilePath(filePath, apiKey)
-	if err != nil {
-		fmt.Printf("Error getting invoice data: %v\n", err)
-		return
-	}
+// Get invoice data from a file path
+invoiceData, err := mindee_client.GetInvoiceDataForFilePath(filePath, apiKey)
+if err != nil {
+	fmt.Printf("Error getting invoice data: %v\n", err)
+	return
+}
 
-	fmt.Printf("Invoice data: %+v\n", invoiceData)
+fmt.Printf("Invoice data: %+v\n", invoiceData)
 }
 ```
 
