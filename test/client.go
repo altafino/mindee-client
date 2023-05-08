@@ -1,0 +1,64 @@
+package mindee_client_test
+
+import (
+	"encoding/base64"
+	"io/ioutil"
+	"os"
+	"testing"
+
+	mindeeClient "github.com/altafino/mindee-client"
+)
+
+// How to run the tests:
+// 1. Set the apiKey and testFilePath constants below
+// 2. Run `go test ./...` from the root of the project
+
+const (
+	apiKey       = "<your-api-key>"
+	testFilePath = "<test-file-name>"
+)
+
+func TestGetInvoiceDataForFilePath(t *testing.T) {
+	data, err := mindeeClient.GetInvoiceDataForFilePath(testFilePath, apiKey)
+	if err != nil {
+		t.Fatalf("GetInvoiceDataForFilePath failed: %v", err)
+	}
+
+	if data == nil {
+		t.Fatal("GetInvoiceDataForFilePath returned nil data")
+	}
+
+	// Add more checks to validate the structure of the returned data, e.g.:
+	// if data.FieldName == "" {
+	//     t.Fatal("GetInvoiceDataForFilePath returned empty FieldName")
+	// }
+}
+
+func TestGetInvoiceDataForBase64(t *testing.T) {
+	file, err := os.Open(testFilePath)
+	if err != nil {
+		t.Fatalf("Failed to open test file: %v", err)
+	}
+	defer file.Close()
+
+	fileContents, err := ioutil.ReadAll(file)
+	if err != nil {
+		t.Fatalf("Failed to read test file: %v", err)
+	}
+
+	base64Content := base64.StdEncoding.EncodeToString(fileContents)
+
+	data, err := mindeeClient.GetInvoiceDataForBase64(base64Content, apiKey)
+	if err != nil {
+		t.Fatalf("GetInvoiceDataForBase64 failed: %v", err)
+	}
+
+	if data == nil {
+		t.Fatal("GetInvoiceDataForBase64 returned nil data")
+	}
+
+	// Add more checks to validate the structure of the returned data, e.g.:
+	// if data.FieldName == "" {
+	//     t.Fatal("GetInvoiceDataForBase64 returned empty FieldName")
+	// }
+}
