@@ -16,7 +16,7 @@ type InvoiceData struct {
 	} `json:"api_request"`
 	Document struct {
 		Annotations struct {
-			Labels []interface{} `json:"labels"`
+			Labels []string `json:"labels"`
 		} `json:"annotations"`
 		ID        string `json:"id"`
 		Inference struct {
@@ -36,8 +36,8 @@ type InvoiceData struct {
 					CustomerCompanyRegistrations []struct {
 						Confidence float64     `json:"confidence"`
 						Polygon    [][]float64 `json:"polygon"`
-						Type       interface{} `json:"type"`
-						Value      interface{} `json:"value"`
+						Type       string      `json:"type"`
+						Value      string      `json:"value"`
 					} `json:"customer_company_registrations"`
 					CustomerName struct {
 						Confidence float64     `json:"confidence"`
@@ -114,8 +114,8 @@ type InvoiceData struct {
 					Taxes []struct {
 						Confidence float64     `json:"confidence"`
 						Polygon    [][]float64 `json:"polygon"`
-						Rate       interface{} `json:"rate"`
-						Value      interface{} `json:"value"`
+						Rate       float64     `json:"rate"`
+						Value      float64     `json:"value"`
 					} `json:"taxes"`
 					TotalAmount struct {
 						Confidence float64     `json:"confidence"`
@@ -225,8 +225,8 @@ type InvoiceData struct {
 					Confidence float64     `json:"confidence"`
 					PageID     int         `json:"page_id"`
 					Polygon    [][]float64 `json:"polygon"`
-					Rate       interface{} `json:"rate"`
-					Value      interface{} `json:"value"`
+					Rate       float64     `json:"rate"`
+					Value      float64     `json:"value"`
 				} `json:"taxes"`
 				TotalAmount struct {
 					Confidence float64     `json:"confidence"`
