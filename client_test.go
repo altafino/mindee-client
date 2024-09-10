@@ -7,6 +7,7 @@ import (
 	"testing"
 
 	"github.com/joho/godotenv"
+	"github.com/altafino/logger"
 	mindee_client "github.com/altafino/mindee-client"
 )
 
@@ -15,6 +16,8 @@ func init() {
 	if err := godotenv.Load(); err != nil {
 		panic("Error loading .env file")
 	}
+	logger.LoggerSettings.TerminalStyle = logger.TerminalStyle(logger.Json)
+
 }
 
 // How to run the tests:
@@ -38,7 +41,10 @@ func TestGetInvoiceDataForFilePath(t *testing.T) {
 		t.Fatal("GetInvoiceDataForFilePath returned nil data")
 	} else {
 		t.Logf("GetInvoiceDataForFilePath returned data: %+v", data)
+		logger.Info(data)
 	}
+
+
 
 	// Add more checks to validate the structure of the returned data, e.g.:
 	// if data.FieldName == "" {
@@ -76,6 +82,7 @@ func TestGetInvoiceDataForBase64(t *testing.T) {
 		t.Fatal("GetInvoiceDataForBase64 returned nil data")
 	} else {
 		t.Logf("GetInvoiceDataForBase64 returned data: %+v", data)
+		logger.Info(data)
 	}
 
 	// Add more checks to validate the structure of the returned data, e.g.:
