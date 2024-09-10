@@ -1,4 +1,4 @@
-# Mindee Client
+# Mindee Invoice API Go Client
 
 A simple Golang client for the Mindee API, allowing you to extract invoice data from JPEG, PNG, WEBP, HEIC, TIFF image or PDF files.
 
