@@ -6,19 +6,29 @@ import (
 	"os"
 	"testing"
 
+	"github.com/joho/godotenv"
 	mindee_client "github.com/altafino/mindee-client"
 )
+
+func init() {
+	// Load .env file
+	if err := godotenv.Load(); err != nil {
+		panic("Error loading .env file")
+	}
+}
 
 // How to run the tests:
 // 1. Set the apiKey and testFilePath constants below
 // 2. Run `go test ./...` from the root of the project
 
-const (
-	apiKey       = "YOUR_API_KEY"
-	testFilePath = "YOUR_TEST_FILE_PATH"
-)
-
 func TestGetInvoiceDataForFilePath(t *testing.T) {
+	apiKey := os.Getenv("API_KEY")
+	testFilePath := os.Getenv("TEST_FILE_PATH")
+
+	if apiKey == "" || testFilePath == "" {
+		t.Fatal("API_KEY or TEST_FILE_PATH not set in .env file")
+	}
+
 	data, err := mindee_client.GetInvoiceDataForFilePath(testFilePath, apiKey)
 	if err != nil {
 		t.Fatalf("GetInvoiceDataForFilePath failed: %v", err)
@@ -37,6 +47,13 @@ func TestGetInvoiceDataForFilePath(t *testing.T) {
 }
 
 func TestGetInvoiceDataForBase64(t *testing.T) {
+	apiKey := os.Getenv("API_KEY")
+	testFilePath := os.Getenv("TEST_FILE_PATH")
+
+	if apiKey == "" || testFilePath == "" {
+		t.Fatal("API_KEY or TEST_FILE_PATH not set in .env file")
+	}
+
 	file, err := os.Open(testFilePath)
 	if err != nil {
 		t.Fatalf("Failed to open test file: %v", err)
