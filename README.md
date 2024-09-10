@@ -43,6 +43,9 @@ func main() {
     }
 }
 ```
+### Example Project
+I did a small sample app to see usage: https://github.com/altafino/testpdf
+
 
 ## Testing
 
