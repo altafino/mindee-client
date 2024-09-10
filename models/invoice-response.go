@@ -20,13 +20,13 @@ type InvoiceData struct {
 		ID        string `json:"id"`
 		Inference struct {
 			Extras             map[string]interface{} `json:"extras"`
-			FinishedAt         time.Time              `json:"finished_at"`
+			FinishedAt         CustomTime              `json:"finished_at"`
 			IsRotationApplied  bool                   `json:"is_rotation_applied"`
 			Pages              []Page                 `json:"pages"`
 			Prediction         Prediction             `json:"prediction"`
 			ProcessingTime     float64                `json:"processing_time"`
 			Product            Product                `json:"product"`
-			StartedAt          time.Time              `json:"started_at"`
+			StartedAt          CustomTime              `json:"started_at"`
 		} `json:"inference"`
 		NPages int    `json:"n_pages"`
 		Name   string `json:"name"`
@@ -245,7 +245,7 @@ type Product struct {
 }
 
 type CustomTime struct {
-	Time time.Time
+	time.Time
 }
 
 const customTimeFormat = "2006-01-02T15:04:05.999999"
