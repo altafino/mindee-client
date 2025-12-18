@@ -19,6 +19,8 @@ const (
 	apiURL = "https://api.mindee.net/v1/products/mindee/invoices/v4/predict"
 )
 
+// GetInvoiceDataForFilePath gets invoice data using V1 API (legacy)
+// For V2 API, use GetInvoiceDataForFilePathV2 with V2Config
 func GetInvoiceDataForFilePath(filePath, apiKey string) (*models.InvoiceData, error) {
 	file, err := os.Open(filePath)
 	if err != nil {
@@ -34,6 +36,8 @@ func GetInvoiceDataForFilePath(filePath, apiKey string) (*models.InvoiceData, er
 	return getInvoiceData(fileContents, apiKey)
 }
 
+// GetInvoiceDataForBase64 gets invoice data from base64 using V1 API (legacy)
+// For V2 API, use GetInvoiceDataForBase64V2 with V2Config
 func GetInvoiceDataForBase64(base64Content, apiKey string) (*models.InvoiceData, error) {
 	fileContents, err := base64.StdEncoding.DecodeString(base64Content)
 	if err != nil {
