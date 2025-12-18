@@ -119,6 +119,12 @@ func main() {
 - `GetInvoiceDataForFilePathV2(filePath string, config V2Config) (*models.InvoiceData, error)`
 - `GetInvoiceDataForBase64V2(base64Content string, config V2Config) (*models.InvoiceData, error)`
 
+**Important Note on V2 Response Mapping:**
+The V2 API returns data in a structure that depends on your custom model configuration. The current implementation provides the V2 API infrastructure (authentication, enqueuing, polling) but does not automatically map V2 response fields to the V1 `InvoiceData` structure. You may need to:
+1. Modify `convertV2ToV1Format()` in `client_v2.go` to map your specific model's fields
+2. Or access the raw V2 response data directly by modifying the return type
+3. Or create a new response model that matches your V2 model's schema
+
 ### Getting Your V2 Model ID
 
 1. Log in to your [Mindee account](https://platform.mindee.com/)

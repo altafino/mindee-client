@@ -17,7 +17,6 @@ import (
 
 const (
 	apiURL = "https://api.mindee.net/v1/products/mindee/invoices/v4/predict"
-	apiV2URL = "https://api.mindee.net/v2/products/mindee/invoices/v4/predict"
 )
 
 // GetInvoiceDataForFilePath gets invoice data using V1 API (legacy)

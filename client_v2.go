@@ -11,8 +11,6 @@ import (
 	"os"
 	"time"
 
-	"github.com/TylerBrock/colorjson"
-
 	"github.com/altafino/mindee-client/models"
 )
 
@@ -96,9 +94,6 @@ func getInvoiceDataV2(fileContents []byte, config V2Config) (*models.InvoiceData
 	if err != nil {
 		return nil, fmt.Errorf("failed to convert response: %v", err)
 	}
-
-	s, _ := colorjson.Marshal(invoiceData)
-	fmt.Println(string(s))
 
 	return invoiceData, nil
 }
@@ -245,18 +240,29 @@ func getInferenceResult(url, apiKey string) (*V2InferenceResponse, error) {
 	return &inferenceResp, nil
 }
 
+// convertV2ToV1Format converts V2 response to V1 InvoiceData format
+// WARNING: This is a placeholder implementation. The V2 API response structure
+// depends entirely on your custom model configuration in the Mindee dashboard.
+// You MUST implement proper field mapping based on your specific model's output.
+//
+// The V2 response contains the extracted data in the "document" or "result" field
+// as a generic map[string]interface{}. You need to map these fields to the V1
+// InvoiceData structure fields according to your model's schema.
+//
+// Example implementation:
+//   if document, ok := v2Resp.Document["prediction"].(map[string]interface{}); ok {
+//       if invoiceNumber, ok := document["invoice_number"].(map[string]interface{}); ok {
+//           data.Document.Inference.Prediction.InvoiceNumber.Value = invoiceNumber["value"].(string)
+//       }
+//       // Map other fields...
+//   }
 func convertV2ToV1Format(v2Resp *V2InferenceResponse) (*models.InvoiceData, error) {
-	// This is a simplified conversion
-	// The actual V2 response structure may vary based on the model
-	// Users may need to customize this conversion based on their model's output
-	
-	// For now, return a basic structure indicating V2 is being used
-	// In a real implementation, you would map the V2 response fields to V1 fields
+	// Return the raw V2 response wrapped in InvoiceData for now
+	// This preserves the data so users can access it directly
 	data := &models.InvoiceData{}
 	
-	// Note: The actual field mapping would depend on the V2 model configuration
-	// This is a placeholder that indicates V2 API is working but doesn't do full conversion
-	// Users should implement proper field mapping based on their model
+	// TODO: Implement field mapping based on your specific V2 model configuration
+	// The mapping will depend on how you configured your model in the Mindee dashboard
 	
 	return data, nil
 }
