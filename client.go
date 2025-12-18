@@ -16,7 +16,7 @@ import (
 )
 
 const (
-	apiURL = "https://api.mindee.net/v1/products/mindee/invoices/v4/predict"
+	apiURL = "https://api.mindee.net/v2/products/mindee/invoices/v4/predict"
 )
 
 func GetInvoiceDataForFilePath(filePath, apiKey string) (*models.InvoiceData, error) {
